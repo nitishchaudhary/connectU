@@ -1,0 +1,57 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>ConnectU</title>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <h3>ConnectU</h3>
+            </div>
+            <ul>
+                <li>About</li>
+                <a href="{% url 'signup' %}"><li>Register</li></a>
+            </ul>
+        </nav>
+        <section>
+            <header>
+                <h2>Login</h2>
+            </header>
+            <div class="error-messages">
+                {% for message in messages %}
+                    <i>{{message}}</i>
+                {% endfor %}
+            </div>
+            <div class="login-form">
+                <form action="{% url 'login' %}" autocomplete="off" method="post">
+                    {% csrf_token %}
+                    <div class="user-name">
+                        <input type="text" name="username" id="" placeholder="Username">
+                    </div>
+                    <div class="password">
+                        <input type="password" name="password" id="" placeholder="Password">
+                    </div>
+                    <div class="login">
+                        <input type="submit" value="Login">
+                    </div>
+                </form>
+            </div>
+            <!-- <div class="forgot-password">
+                <i>Forgot password ?</i>
+            </div> -->
+            <div class="new-user">
+                <b>New User ?</b>
+                <div class="register-here">
+                    <a href="{% url 'signup' %}"><button>Sign Up</button></a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <title>Results</title>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <a href="/"><h3>ConnectU</h3></a>
+            </div>
+            <div class="search-user">
+                <form action="{% url 'search-user' %}" method="get" autocomplete="off" id="search-user-form">
+                    <i class="fa-solid fa-magnifying-glass"></i><input type="text" name="user"></input>
+                </form>
+            </div>
+            <ul>
+                <li>About</li>
+                <a href="{% url 'logout' %}"><li>Logout</li></a>
+                <li id="user-nav"><i>Hi</i> , {{user.username}}</li>
+                <li><img src="{{user.profile.pic.url}}" id="usr-profile-nav"></li>
+                <input type="hidden" id="logged-in-user" value="{{user.username}}">
+            </ul>
+        </nav>
+        <div class="search-results">
+            {% for user0 in users %}
+                <div class="result-user">
+                    <div class="user-profile-img">
+                        <img src="{{user0.profile.pic.url}}" alt="" srcset="">
+                    </div>
+                    <div class="user-name">
+                        <i>{{user0.username}}</i> 
+                    </div>
+                    <div class="request-button">
+                        <a href="{% url 'user-chat' user0.username %}"><button>Chat request</button>
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/194344ab1e.js" crossorigin="anonymous"></script>
+</body>
+</html>

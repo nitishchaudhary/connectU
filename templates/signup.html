@@ -1,0 +1,70 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>ConnectU - Signup</title>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <h3>ConnectU</h3>
+            </div>
+            <ul>
+                <li>About</li>
+                <a href="{% url 'login' %}"><li>Login</li></a>
+            </ul>
+        </nav>
+        <section>
+            <header>
+                <h2>Sign Up</h2>
+            </header>
+            <div class="error-messages">
+                {% for message in messages %}
+                    <i>{{message}}</i>
+                {% endfor %}
+            </div>
+            <div class="login-form">
+                <form action="{% url 'signup' %}" id='sign-up-form'autocomplete="off" onsubmit="return validate_form()"method="post">
+                    {% csrf_token %}
+                    <div class="names">
+                        <div class="first-name">
+                            <input type="text" name="firstname" id="first_name" placeholder="Firstname">
+                        </div>
+                        <div class="last-name">
+                            <input type="text" name="lastname" id="last_name" placeholder="Lastname">
+                        </div>
+                    </div>
+                    <div class="user-name">
+                        <input type="text" name="username" id="user_name" placeholder="Username">
+                    </div>
+                    <div class="password">
+                        <input type="password" name="password" id="password" placeholder="Password">
+                    </div>
+                    <div class="password-again">
+                        <input type="password" name="password-again" id="password_again" placeholder="Renter Password">
+                    </div>
+                    <div class="password-error-messages"></div>
+                    <div class="login">
+                        <input type="submit" value="Sign Up">
+                    </div>
+                </form>
+            </div>
+            <!-- <div class="forgot-password">
+                <i>Forgot password ?</i>
+            </div> -->
+            <div class="new-user">
+                <b>Already User ?</b>
+                <div class="register-here">
+                    <a href="{% url 'login' %}"><button>Login</button></a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: auto;
+}
+.container {
+    margin: 0 auto;
+    text-align: center;
+}
+.container nav .logo h3{
+    font-family: 'segoe UI';
+    font-size: 25px;
+    color: rgb(235, 235, 235);
+    font-weight: 500;
+}
+.container nav{
+    background-color: rgb(77, 20, 151);
+    padding: 10 40;
+    display: flex;
+    justify-content:space-between;
+}
+.search-user{
+    border: solid 1px black;
+}
+.container nav ul {
+    display: flex;
+    font-family: 'segoe UI';
+    font-weight: 500;
+    list-style: none;
+    justify-content: space-between;
+}
+.container nav ul li{
+    margin: 5 15;
+    color: white;
+}
+.container section{
+    margin-top: 50px;
+}
+.container section header{
+    /* border: solid 1px grey; */
+    padding: 10px;
+    color: rgb(77, 20, 151);
+    font-size: 20px;
+    font-family: 'segoe UI';
+    width: fit-content;
+    margin: 0 auto;
+}
+.error-messages ,.password-error-messages{
+    color: red;
+    font-style: normal;
+    font-weight: 500;
+    font-family: 'segoe UI';
+}
+.error-messages i{
+    font-style: normal;
+}
+.container section{
+    /* border: solid 1px grey; */
+    padding:20px;
+    border-radius: 5px;
+    width: 35%;
+    margin: 40 auto;
+    background-color: rgb(199, 199, 199);
+}
+.container section .login-form{
+    padding: 20 0;
+    margin: 0 auto;
+}
+.names{
+    display: flex;
+    justify-content:space-between ;
+    /* padding: 10px; */
+}
+.user-name,.password,.password-again{
+    display: flex;
+}
+
+.login-form input[type='text'],.login-form input[type='password']{
+    width: 100%;
+    /* position: relative; */
+    padding: 10px;
+    border-radius: 5px;
+    /* border: solid 1px grey; */
+    border: none;
+    margin: 10px;
+    font-size: 15px;
+    font-family: 'segoe UI';
+    font-weight: 500;
+    color: rgb(20, 20, 20);
+    outline-color: rgb(61, 61, 61);
+}
+.login-form input::placeholder{
+    font-size: 15px;
+    font-family: 'segoe Ui';
+    font-weight: 500;
+}
+.last-name,.first-name{
+    /* border: solid 1px grey; */
+    /* padding: 5px; */
+    text-align: align left;
+    width: 100%;
+}
+.names input[name='firstname'] , .names input[name='lastname']{
+    width: 90%;
+    /* margin: 0px; */
+}
+.login-form input[type='submit']{
+    width: 100px;
+    border-radius: 5px;
+    height: 40px;
+    margin: 10px;
+    font-family: 'segoe UI';
+    font-size: 18px;
+    font-weight: 400;
+    border: none;
+    color: white;
+    background-color: rgb(77, 20, 151);
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+.login-form input[type='submit']:hover{
+    background-color: rgb(95, 32, 177);
+}
+.forgot-password{
+    /* padding: 10px; */
+    /* border: solid 1px grey; */
+    width: fit-content;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    font-family:'segoe UI';
+    font-style: normal;
+    font-weight: 400;
+}
+.new-user{
+    /* border: solid 1px grey; */
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(231, 231, 231);
+    /* width: 40%; */
+    margin: 0 auto;
+    padding: 10px;
+}
+.new-user b{
+    font-family: 'segoe UI';
+    font-size: 18px;
+    font-weight: 500;
+    margin: 10px;
+}
+.new-user button{
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color:rgb(77, 20, 151);
+    width: 120px;
+    color: white;
+    height: 40px;
+    font-family: 'segoe UI';
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+.new-user button:hover{
+    background-color: rgb(95,37,177);
+}

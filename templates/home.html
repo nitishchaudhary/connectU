@@ -1,0 +1,32 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <title>ConnectU</title>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <a href="/"><h3>ConnectU</h3></a>
+            </div>
+            <div class="search-user">
+                <form action="{% url 'search-user' %}" method="get" autocomplete="off" id="search-user-form">
+                    <i class="fa-solid fa-magnifying-glass"></i><input type="text" name="user"></input>
+                </form>
+            </div>
+            <ul>
+                <li>About</li>
+                <a href="{% url 'logout' %}"><li>Logout</li></a>
+                <li id="user-nav"><i>Hi</i> , {{user.username}}</li>
+                <li><img src="{{user.profile.pic.url}}" id="usr-profile-nav"></li>
+                <input type="hidden" id="logged-in-user" value="{{user.username}}">
+            </ul>
+        </nav>
+    </div>
+    <script src="https://kit.fontawesome.com/194344ab1e.js" crossorigin="anonymous"></script>
+</body>
+</html>
