@@ -3,11 +3,23 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login as auth_login , authenticate,logout
 from django.contrib import messages
-
+from django.db.models import Q
+from .models import Message
 
 def home(request):
      if request.user.is_authenticated:
-          return render(request,'home.html')
+          id = request.user.id
+          user = User.objects.get(id=id)
+          recent_chats = Message.objects.all().filter(Q(sender_id = user)| Q(reciever_id = user))
+          print(recent_chats)
+          user_list = []
+          for chat in recent_chats:
+               if(chat.sender_id !=  user and chat.sender_id not in user_list):
+                    user_list.append(chat.sender_id)
+               if(chat.reciever_id != user and chat.reciever_id not in user_list):
+                    user_list.append(chat.reciever_id)
+          print(user_list)
+          return render(request,'home.html',{'user_list':user_list})
      else:
           return render(request,'index.html')
 

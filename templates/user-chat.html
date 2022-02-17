@@ -27,42 +27,98 @@
             </ul>
         </nav>
         <section>
-            <div class="chat-box">
-                <div class="user-detail">
+            <div class="left-bar">
+                <div class="recent-chats">
+                    <h3>Recent Chats</h3>
+                    <div class="recent-user-list">
+                        {% for usr in user_list %}
+                            <div class="recent-user" onclick="location.href='/user/{{usr.username}}';">
+                                <div class="user-profile-img">
+                                    <img src="{{usr.profile.pic.url}}" alt="">
+                                </div>
+                                <div class="user-name">
+                                    <b>{{usr.username}}</b>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="friend-list">
+                    <h3>Friends</h3>
+                    <div class="recent-user-list">
+                        <div class="recent-user">
+                            <div class="user-profile-img">
+                                <img src="{{user.profile.pic.url}}" alt="">
+                            </div>
+                            <div class="user-name">
+                                <b>{{user.username}}</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="middle-bar">
+                <div class="chat-box">
+                    <div class="user-detail">
+                        <div class="user-profile-img">
+                            {% if user0 %}
+                                <img src="{{user0.profile.pic.url}}" alt="">
+                            {% endif %}
+                        </div>
+                        <div class="user-name">
+                            <input type="hidden" id="other-user" value="{{user0.username}}">
+                            {% if user0 %}
+                                <i>{{user0.username}}</i>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="messages-wrapper">
+                        {% if messages %}
+                            {% for msg in messages %}
+                                {% if msg.sender_id == user %}
+                                    <div class="show-sent-message">
+                                        <h4>{{msg.message}}</h4>
+                                        <i><h4>{{msg.mesage_date}}</h4></i>
+                                    </div>
+                                {% else %}
+                                    <div class="show-received-message">
+                                        <h4>{{msg.message}}</h4>
+                                        <i><h4>{{msg.mesage_date}}</h4></i>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="mssg-form-container">
+                        <form action="" method="post" autocomplete="off" id="message-form">
+                            {% csrf_token %}
+                            <input type="text" name="message" id="mssg-text" placeholder="Type your mssg here">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="right-bar">
+                {% if user0 %}
                     <div class="user-profile-img">
                         <img src="{{user0.profile.pic.url}}" alt="">
                     </div>
                     <div class="user-name">
-                        <input type="hidden" id="other-user" value="{{user0.username}}">
-                        {% if user0 %}
-                            <i>{{user0.username}}</i>
-                        {% endif %}
+                        <h2>{{user0.username}}</h2>
                     </div>
-                    
-                </div>
-                <div class="messages-wrapper">
-                    {% if messages %}
-                        {% for msg in messages %}
-                            {% if msg.sender_id == user %}
-                                <div class="show-sent-message">
-                                    <h4>{{msg.message}}</h4>
-                                    <i><h4>{{msg.mesage_date}}</h4></i>
-                                </div>
-                            {% else %}
-                                <div class="show-received-message">
-                                    <h4>{{msg.message}}</h4>
-                                    <i><h4>{{msg.mesage_date}}</h4></i>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                </div>
-                <div class="mssg-form-container">
-                    <form action="" method="post" autocomplete="off" id="message-form">
-                        {% csrf_token %}
-                        <input type="text" name="message" id="mssg-text" placeholder="Type your mssg here">
-                    </form>
-                </div>
+                    <div class="user-about">
+                        <h3>{{user0.profile.about}}</h3>
+                    </div>
+                {% else %}
+                    <div class="user-profile-img">
+                        <img src="{{user.profile.pic.url}}" alt="">
+                    </div>
+                    <div class="user-name">
+                        <h2>{{user.username}}</h2>
+                    </div>
+                    <div class="user-about">
+                        <h3>{{user.profile.about}}</h3>
+                    </div>
+                {% endif %}
             </div>
         </section>
     </div>

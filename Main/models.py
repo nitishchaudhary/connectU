@@ -16,3 +16,4 @@ class Message(models.Model):
     message = models.CharField(max_length=255)
     mesage_date = models.DateTimeField(default=timezone.now)
     image = models.ImageField(upload_to = 'message_media',blank=True)
+

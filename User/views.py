@@ -11,13 +11,20 @@ def home(request):
     return HttpResponse('home page')
 
 def user(request,username=None):
-    id = request.user.id
-    user = User.objects.get(id=id)
-    user0 = User.objects.get(username=username)
-    messages = Message.objects.filter(Q(sender_id = user,reciever_id = user0) | Q(sender_id = user0 , reciever_id = user)).order_by('mesage_date')
-     
     if request.user.is_authenticated:
-        return render(request,'user-chat.html',{'user0':user0,'messages':messages})
+        id = request.user.id
+        user = User.objects.get(id=id)
+        user0 = User.objects.get(username=username)
+        recent_chats = Message.objects.all().filter(Q(sender_id = user)| Q(reciever_id = user))
+        user_list = []
+        for chat in recent_chats:
+            if(chat.sender_id !=  user and chat.sender_id not in user_list):
+                user_list.append(chat.sender_id)
+            if(chat.reciever_id != user and chat.reciever_id not in user_list):
+                user_list.append(chat.reciever_id)
+            
+        messages = Message.objects.filter(Q(sender_id = user,reciever_id = user0) | Q(sender_id = user0 , reciever_id = user)).order_by('mesage_date')    
+        return render(request,'user-chat.html',{'user0':user0,'user_list':user_list,'messages':messages})
     else:
         return render(request,'index.html')
 

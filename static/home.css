@@ -78,13 +78,13 @@ ul a{
 }
 .chat-box {
   /* border: solid 1px grey; */
-  width: 50%;
+  width: 100%;
   /* background-color: gainsboro; */
-  margin: 50 auto;
-  border: solid 1px grey;
+  margin: 0 auto;
+  /* border: solid 1px grey; */
   border-radius: 5px;
   padding: 10px;
-  height: 80%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -94,8 +94,8 @@ ul a{
   height: 50px;
   outline: none;
   border: none;
-  background-color: rgb(202, 202, 202);
-  border-radius: 10px;
+  background-color: rgb(170,170,170);
+  border-radius: 25px;
   padding: 10px;
   font-family: "segoe UI";
   font-size: 16px;
@@ -230,4 +230,74 @@ ul a{
   background-color: green;
   width: auto;
   padding: 10px;
+}
+.container section{
+  /* border: solid 1px grey; */
+  width: 100%;
+  margin: 0 auto;
+  height: 90vh;
+  display: flex;
+}
+.left-bar{
+  border-right: solid 1px grey;
+  width: 25%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+}
+.left-bar h3{
+  border-bottom: solid 1px grey;
+  padding: 5px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 90%;
+  font-size: 22px;
+  color: rgb(26, 26, 26);
+  font-weight: 500;
+
+}
+.recent-chats,.friend-list{
+  height: 50%;
+}
+.recent-user-list{
+  /* border: solid 1px grey; */
+  padding: 5px;
+  width: 90%;
+  margin: 0 auto;
+  
+}
+.recent-user{
+  display: flex;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.recent-user:hover{
+  background-color: rgb(120, 102, 150);
+}
+.middle-bar{
+  /* border: solid 1px grey; */
+  width: 50%;
+}
+.right-bar{
+  border-left: solid 1px grey;
+  width: 25%;
+  padding: 20px;
+  padding-top: 50px;
+}
+.right-bar .user-profile-img img{
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+}
+.user-name h2{
+  font-size: 25px;
+  color: rgb(10, 10, 10);
+  font-weight: 500;
+}
+.user-about h3{
+  font-size: 20px;
+  font-weight: 500;
 }
