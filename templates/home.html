@@ -19,10 +19,10 @@
                 </form>
             </div>
             <ul>
-                <li>About</li>
-                <a href="{% url 'logout' %}"><li>Logout</li></a>
-                <li id="user-nav"><i>Hi</i> , {{user.username}}</li>
-                <li><img src="{{user.profile.pic.url}}" id="usr-profile-nav"></li>
+                <!-- <li>About</li> -->
+                <a href="{% url 'logout' %}"><li id="logout-btn">Logout</li></a>
+                <li id="user-nav"><i>Hi</i> , <a href="/">{{user.username}}</a></li>
+                <!-- <li><img src="{{user.profile.pic.url}}" id="usr-profile-nav"></li> -->
                 <input type="hidden" id="logged-in-user" value="{{user.username}}">
             </ul>
         </nav>
@@ -38,22 +38,10 @@
                                 </div>
                                 <div class="user-name">
                                     <b>{{usr.username}}</b>
+                                    <i class="fa-solid fa-chevron-right"></i>
                                 </div>
                             </div>
                         {% endfor %}
-                    </div>
-                </div>
-                <div class="friend-list">
-                    <h3>Friends</h3>
-                    <div class="recent-user-list">
-                        <div class="recent-user">
-                            <div class="user-profile-img">
-                                <img src="{{user.profile.pic.url}}" alt="">
-                            </div>
-                            <div class="user-name">
-                                <b>{{user.username}}</b>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

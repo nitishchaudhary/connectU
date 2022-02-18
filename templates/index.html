@@ -14,7 +14,7 @@
                 <h3>ConnectU</h3>
             </div>
             <ul>
-                <li>About</li>
+                <!-- <li>About</li> -->
                 <a href="{% url 'signup' %}"><li>Register</li></a>
             </ul>
         </nav>
@@ -47,11 +47,12 @@
             <div class="new-user">
                 <b>New User ?</b>
                 <div class="register-here">
-                    <a href="{% url 'signup' %}"><button>Sign Up</button></a>
+                    <a href="{% url 'signup' %}"><button>Sign Up <i class="fa-solid fa-chevron-right"></i></button></a>
                 </div>
             </div>
         </section>
     </div>
+    <script src="https://kit.fontawesome.com/194344ab1e.js" crossorigin="anonymous"></script>
     <script src="{% static 'script.js' %}"></script>
 </body>
 </html>
