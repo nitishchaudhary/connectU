@@ -25,6 +25,7 @@ class UserConsumer(AsyncConsumer):
         print('receive',event)
         received_data = json.loads(event['text'])
         msg = received_data.get('message')
+        print(msg)
         sent_by_username = received_data.get('sent_by')
         sent_to_username = received_data.get('sent_to')
         if not msg:

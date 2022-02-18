@@ -1,3 +1,4 @@
+
 const user_name = document.getElementById("logged-in-user").value;
 const other_user_name = document.getElementById("other-user").value;
 console.log(user_name);
@@ -9,13 +10,17 @@ let wsStart = 'ws://'
 let endpoint = wsStart + loc.host + loc.pathname
 var socket = new WebSocket(endpoint)
 
+
 socket.onopen = async function(e){
     console.log('open',e)
     $("#message-form").on('submit',function(e){
         e.preventDefault();
         let msg = $('#mssg-text').val();
+        let en = CryptoJS.AES.encrypt(msg,"nitish").toString();
+        // let dc = CryptoJS.AES.decrypt(en,"nitish");
+        // console.log(dc.toString(CryptoJS.enc.Utf8));
         let data = {
-            'message':msg,
+            'message':en,
             'sent_by':user_name,
             'sent_to':other_user_name,
         }
@@ -28,7 +33,8 @@ socket.onopen = async function(e){
 socket.onmessage = async function(e){
     console.log('message',e)
     let data = JSON.parse(e.data);
-    let message = data['message']
+    let dc = data['message']
+    let message = CryptoJS.AES.decrypt(dc,"nitish").toString(CryptoJS.enc.Utf8);
     let sent_by_user = data['sent_by']
     if(sent_by_user == other_user_name){
         message_element = `

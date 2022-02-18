@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'home.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/aes.min.js" integrity="sha512-4b1zfeOuJCy8B/suCMGNcEkMcQkQ+/jQ6HlJIaYVGvg2ZydPvdp7GY0CuRVbNpSxNVFqwTAmls2ftKSkDI9vtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <title>ConnectU</title>
 </head>
 <body>
@@ -61,22 +65,33 @@
                         </div>
                     </div>
                     <div class="messages-wrapper">
-                        {% if messages %}
-                            {% for msg in messages %}
-                                {% if msg.sender_id == user %}
-                                    <div class="show-sent-message">
-                                        <h4>{{msg.message}}</h4>
-                                        <i><h4>{{msg.mesage_date}}</h4></i>
-                                    </div>
-                                {% else %}
-                                    <div class="show-received-message">
-                                        <h4>{{msg.message}}</h4>
-                                        <i><h4>{{msg.mesage_date}}</h4></i>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
                     </div>
+                    <script>
+                        let e = "{{datajson}}";
+                        let d = JSON.parse(e.replace(/&quot;/g,'"'));
+                        for (var key in d){
+                            let msg = CryptoJS.AES.decrypt((d[key]['fields']['message']),"nitish").toString(CryptoJS.enc.Utf8);
+                            let msg_date =d[key]['fields']['mesage_date'] 
+                            if(d[key]['fields']['sender_id'] == "{{user.id}}"){
+                                txt =`
+                                    <div class="show-sent-message">
+                                        <h4>${msg}</h4>
+                                        <i><h4>${msg_date}</h4></i>
+                                    </div>
+                                `
+                            }
+                            else{
+                                txt = `
+                                    <div class="show-received-message">
+                                        <h4>${msg}</h4>
+                                        <i><h4>${msg_date}</h4></i>
+                                    </div>
+                                `
+                            }
+                            $('.messages-wrapper').append(txt);
+                        }
+                        
+                    </script>
                     <div class="mssg-form-container">
                         <form action="" method="post" autocomplete="off" id="message-form">
                             {% csrf_token %}
@@ -112,7 +127,6 @@
         </section>
     </div>
     <script src="https://kit.fontawesome.com/194344ab1e.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'messages.js' %}"></script>
 </body>
 </html>

@@ -4,6 +4,9 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from Main.models import Message
 from django.db.models import Q
+from django.core import serializers
+from json import dumps
+import json
 from django.contrib.auth import login as auth_login , authenticate,logout
 # Create your views here.
 
@@ -24,7 +27,10 @@ def user(request,username=None):
                 user_list.append(chat.reciever_id)
             
         messages = Message.objects.filter(Q(sender_id = user,reciever_id = user0) | Q(sender_id = user0 , reciever_id = user)).order_by('mesage_date')    
-        return render(request,'user-chat.html',{'user0':user0,'user_list':user_list,'messages':messages})
+        x = serializers.serialize('json',messages)
+        # print(x)
+        
+        return render(request,'user-chat.html',{'user0':user0,'datajson':x,'user_list':user_list,'messages':messages})
     else:
         return render(request,'index.html')
 
