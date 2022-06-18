@@ -27,6 +27,11 @@ def user(request,username=None):
                 user_list.append(chat.reciever_id)
             
         messages = Message.objects.filter(Q(sender_id = user,reciever_id = user0) | Q(sender_id = user0 , reciever_id = user)).order_by('mesage_date')    
+        read_messages = messages.filter(sender_id = user0)
+        for i in read_messages:
+            i.read = True
+            i.save()
+            print(i.read)
         x = serializers.serialize('json',messages)
         # print(x)
         
